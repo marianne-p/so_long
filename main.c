@@ -1,19 +1,23 @@
 #include "so_long.h"
-#include "libft/libft.h"
 
-void	create_the_map(t_list *head)
-{
-	while (head != NULL)
-	{
-		ft_printf("%s\n", head->content);
-		head = head->next;
-	}
-}
-
-int	handle_error(char *error)
+int	handle_error(char *error, int ernum)
 {
 	perror(error);
-	return (1);
+	return (ernum);
+}
+
+void	create_the_map(t_list *head, int i, char **map)
+{
+	map = (char **)malloc(ft_lstsize(head) * sizeof(char *));
+	if (!map)
+		exit(handle_error("Map alloc in create_the_map:", 1));
+	ft_printf("%d\n", i);
+	while (head != NULL && head->content != NULL)
+	{
+		ft_printf("%s", head->content);
+		head = head->next;
+	}
+	free(map);
 }
 
 int	main(int argc, char **argv)
@@ -26,13 +30,16 @@ int	main(int argc, char **argv)
 		exit(write(2, "Check args\n", 11));
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		exit(handle_error("Fd issue"));
+		exit(handle_error("Fd issue", 1));
 	line = get_next_line(fd);
+	head = ft_lstnew(line);
 	while (line != NULL)
 	{
-		ft_lstadd_back(&head, ft_lstnew(line));
 		line = get_next_line(fd);
+		ft_lstadd_back(&head, ft_lstnew(line));
 	}
-	create_the_map(head);
+	create_the_map(head, 0, NULL);
+	ft_lstclear(&head, free);
+	ft_printf("%p\n", head);
 	return (0);
 }
