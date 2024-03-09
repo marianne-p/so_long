@@ -20,4 +20,7 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 
+int	handle_error(char *error, int ernum);
+int verify_the_map(t_list *head);
+
 #endif

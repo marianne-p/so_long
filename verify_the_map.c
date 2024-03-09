@@ -2,7 +2,7 @@
 
 int is_rectangular(t_list *head)
 {
-    int len;
+    size_t len;
 
     len = ft_strlen(head->content);
     while (head->next != NULL)
@@ -18,9 +18,9 @@ int letter_count(t_list *head, char a, int count, int i)
 {
     while (head != NULL)
     {
-        while (head->content[i])
+        while (((char *)head->content)[i])
         {
-            if (head->content[i] == a)
+            if (((char *)head->content)[i] == a)
                 count++; 
             i++;
         }
@@ -33,7 +33,7 @@ int contains_ecp(t_list *head)
 {
     if (letter_count(head, 'E', 0, 0) != 1)
     {
-        write(2, "Incorrect num of Exits\n", 23);
+        (void)write(2, "Incorrect num of Exits\n", 23);
         return (1);
     }
     if (letter_count(head, 'C', 0, 0) < 1)
@@ -49,9 +49,21 @@ int contains_ecp(t_list *head)
     return (0);
 }
 
-int has_walls(t_list *head)
+int has_walls(t_list *head, int i, t_list *last)
 {
-
+    while (((char *)head->content)[i] && ((char *)last->content)[i])
+    {
+        if ((ft_strncmp(&((const char *)head->content)[i], "1", 1) != 0) || (ft_strncmp(&((char *)last->content)[i], "1", 1) != 0))
+            return (1);
+        i++;
+    }
+    while (head != last)
+    {
+        if (((char *)head->content)[0] != '1' || ((char *)head->content)[ft_strlen(head->content) - 1] != '1')
+            return (1);
+        head = head->next;
+    }
+    return (0);
 }
 
 /*
@@ -66,7 +78,8 @@ int verify_the_map(t_list *head)
         exit(handle_error("Map not rectangular", 1));
     if (contains_ecp(head) != 0)
         exit(1);
-    if (has_walls(head) != 0)
+    if (has_walls(head, 0, ft_lstlast(head)) != 0)
         exit(handle_error("No walls: ", 1));
     //if (has_paths(head) != 0)
+    return (0);
 }

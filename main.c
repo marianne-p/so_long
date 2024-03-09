@@ -6,12 +6,12 @@ int	handle_error(char *error, int ernum)
 	return (ernum);
 }
 
-void	create_the_map(t_list *head, int i, char **map)
+void	create_the_map(t_list *head, char **map)
 {
 	map = (char **)malloc(ft_lstsize(head) * sizeof(char *));
 	if (!map)
 		exit(handle_error("Map alloc in create_the_map:", 1));
-	ft_printf("%d\n", i);
+	//ft_printf("%d\n", i);
 	while (head != NULL && head->content != NULL)
 	{
 		ft_printf("%s", head->content);
@@ -38,8 +38,10 @@ int	main(int argc, char **argv)
 		line = get_next_line(fd);
 		ft_lstadd_back(&head, ft_lstnew(line));
 	}
-	create_the_map(head, 0, NULL);
+	create_the_map(head, NULL);
+	if (verify_the_map(head) != 0)
+		return (1);
 	ft_lstclear(&head, free);
-	ft_printf("%p\n", head);
+	//ft_printf("%p\n", head);
 	return (0);
 }
