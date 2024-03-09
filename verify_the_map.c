@@ -53,9 +53,9 @@ int contains_ecp(t_list *head)
     return (0);
 }
 
-int has_walls(t_list *head, int i, t_list *last)
+int has_walls(t_list *head, int i, t_list *last, int len)
 {
-    while (((char *)head->content)[i] && ((char *)last->content)[i])
+    while (i < len - 1 && ((char *)head->content)[i] && ((char *)last->content)[i])
     {
         if ((ft_strncmp(&((const char *)head->content)[i], "1", 1) != 0)
 			|| (ft_strncmp(&((char *)last->content)[i], "1", 1) != 0))
@@ -65,7 +65,7 @@ int has_walls(t_list *head, int i, t_list *last)
     while (head != last)
     {
         if (((char *)head->content)[0] != '1'
-			|| ((char *)head->content)[ft_strlen(head->content) - 1] != '1')
+			|| ((char *)head->content)[ft_strlen(head->content) - 2] != '1')
             return (1);
         head = head->next;
     }
@@ -84,7 +84,7 @@ int verify_the_map(t_list *head)
         exit(handle_error("Map not rectangular", 1));
     if (contains_ecp(head) != 0)
         exit(1);
-    if (has_walls(head, 0, ft_lstlast(head)) != 0)
+    if (has_walls(head, 0, ft_lstlast(head), ft_strlen(head->content)) != 0)
         exit(handle_error("No walls: ", 1));
     //if (has_paths(head) != 0)
     return (0);
