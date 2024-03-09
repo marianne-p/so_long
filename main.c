@@ -33,11 +33,8 @@ int	main(int argc, char **argv)
 		exit(handle_error("Fd issue", 1));
 	line = get_next_line(fd);
 	head = ft_lstnew(line);
-	while (line != NULL)
-	{
-		line = get_next_line(fd);
+	while ((line =  get_next_line(fd)) != NULL)
 		ft_lstadd_back(&head, ft_lstnew(line));
-	}
 	create_the_map(head, NULL);
 	if (verify_the_map(head) != 0)
 		return (1);
