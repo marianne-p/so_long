@@ -49,6 +49,7 @@ int	close_win(void *param)
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
 	ft_lstclear(map->head_ptr, free);
+	free(map);
 	exit (1); //add FREEs if more alloc's done!
 }
 
@@ -62,25 +63,14 @@ int	handle_keys(int keysum, void *param)
 	return (0);
 }
 
-t_win	*create_map_win(t_list *head)
+void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 {
-	t_win	*map = NULL;
-	void	*param;
-
-	map->mlx_ptr = mlx_init();
-	if (map->mlx_ptr == NULL)
-		return (NULL);
-	map->width = TILE_SIDE * (ft_strlen((char *)head->content) - 1);
-	map->height = TILE_SIDE * (ft_lstsize(head));
+	(*map_ptr)->width = TILE_SIDE * (ft_strlen((char *)(*head_ptr)->content) - 1);
+	(*map_ptr)->height = TILE_SIDE * (ft_lstsize(*head_ptr));
 	//does lstsize give correct num?
-	if (window_image(&map) == NULL)
-		return (NULL);
-	if (put_images_to_win(&map, 0, 0) == NULL)
-		return (NULL); //are frees done before returning NULL?	
-	map->head_ptr = &head;
-	param = (void *)map;
-	mlx_key_hook(map->win_ptr, &handle_keys, param);
-	mlx_hook(map->win_ptr, ON_DESTROY, 0L, &close_win, param);
-	mlx_loop(map->mlx_ptr);
-	return (map);
+	if (window_image(map_ptr) == NULL)
+		return ;
+	if (put_images_to_win(map_ptr, 0, 0) == NULL)
+		return ; //are frees done before returning NULL?	
+	(*map_ptr)->head_ptr = head_ptr;
 }

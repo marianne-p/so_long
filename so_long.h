@@ -14,7 +14,7 @@
 #define SO_LONG_H
 
 # define TILE_SIDE 16
-# define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile001.xpm"
+# define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile027.xpm"
 # define ZERO_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile003.xpm"
 
 # include <stdio.h>
@@ -50,6 +50,8 @@ typedef struct s_win
 
 int	handle_error(char *error, int ernum);
 int verify_the_map(t_list *head);
-t_win	*create_map_win(t_list *head);
+void create_map_win(t_win **map_ptr, t_list **head_ptr);
+int	close_win(void *param);
+int	handle_keys(int keysum, void *param);
 
 #endif
