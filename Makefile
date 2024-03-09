@@ -1,20 +1,19 @@
 NAME	:= so_long
 CC	:= gcc
-CFLAGS	:= -Wall -Wextra -Werror
 GNL	:= get_next_line/
-SRCS	:= main.c verify_the_map.c $(GNL)get_next_line.c $(GNL)get_next_line_utils.c	   
+SRCS	:= main.c verify_the_map.c create_map_win.c $(GNL)get_next_line.c $(GNL)get_next_line_utils.c	   
 OBJ := $(SRCS:.c=.o)
 CFLAGS := -Wall -Wextra -Werror -g
 FT_PRINTF := ./ft_printf/libftprintf.a
 LIBFT := ./libft/libft.a
 LDFLAGS := -I. -L./libft -lft -L./ft_printf -lftprintf
+MLXFLAGS := -Lminilibx-linux -lmlx -Iminilibx-linux -lXext -lX11 -lm -lz 
 
 %.o: %.c
 	$(CC) $(CFLAGS) -Imlx_linux -O3 -c $< -o $@
 
 $(NAME): $(LIBFT) $(FT_PRINTF) $(OBJ) 
-		$(CC) $(OBJ) $(LDFLAGS) -I$(GNL) -o $(NAME)
-		##-Lminilibx-linux -lmlx -Iminilibx-linux -lXext -lX11 -lm -lz -o $(NAME)
+		$(CC) $(OBJ) $(LDFLAGS) -I$(GNL) $(MLXFLAGS) -o $(NAME)
 
 $(LIBFT):
 	make bonus -C ./libft

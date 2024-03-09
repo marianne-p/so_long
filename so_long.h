@@ -20,13 +20,26 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
 # include "ft_printf/ft_printf.h"
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+
 typedef struct s_win
 {
     void    *mlx_ptr;
+    t_list  **head_ptr;
     void    *win_ptr;
     void    *wall_img_ptr;
     int     width;
@@ -37,5 +50,6 @@ typedef struct s_win
 
 int	handle_error(char *error, int ernum);
 int verify_the_map(t_list *head);
+t_win	*create_map_win(t_list *head);
 
 #endif
