@@ -35,7 +35,7 @@ void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 		width_now = 0;
 		height_now += (*map_ptr)->img_height;
 	}
-	return (NULL);
+	return (map_ptr);
 }
 
 int	close_win(void *param)
@@ -48,9 +48,10 @@ int	close_win(void *param)
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
+	//ft_printf("Pointer to head %p\n", map->head_ptr);
 	ft_lstclear(map->head_ptr, free);
 	free(map);
-	exit (1); //add FREEs if more alloc's done!
+	return (1); //add FREEs if more alloc's done!
 }
 
 int	handle_keys(int keysum, void *param)

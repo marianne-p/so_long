@@ -6,14 +6,14 @@
 /*   By: mpihur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:33:14 by mpihur            #+#    #+#             */
-/*   Updated: 2024/03/08 16:40:23 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/03/10 19:13:41 by mpihur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-# define TILE_SIDE 16
+# define TILE_SIDE 64
 # define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile027.xpm"
 # define ZERO_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile003.xpm"
 
