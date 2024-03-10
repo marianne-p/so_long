@@ -43,12 +43,14 @@ int	main(int argc, char **argv)
 	while ((line =  get_next_line(fd)) != NULL)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	create_the_map(head, NULL);
+	create_square(map);
 	if (verify_the_map(head) != 0)
 		return (1);
 	create_map_win(&map, &head);
 	mlx_key_hook(map->win_ptr, &handle_keys, (void *)map);
 	mlx_hook(map->win_ptr, ON_DESTROY, 0L, &close_win, (void *)map);
 	mlx_loop(map->mlx_ptr);
+	ft_printf("Going to lstclear in main()");
 	ft_lstclear(&head, free);
 	free(map);
 	//ft_printf("%p\n", head);

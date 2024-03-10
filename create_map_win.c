@@ -24,14 +24,26 @@
 
 void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 {
+	int	i;
+	t_list	*head;
+
+	i = 0;
+	head = (*(*map_ptr)->head_ptr);
 	while (height_now < (*map_ptr)->height)
 	{
 		while (width_now < (*map_ptr)->width)
 		{
-			mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->wall_img_ptr,
-				width_now, height_now);
+			if (((int *)head->content)[i++] == '1')
+			{
+				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
+					(*map_ptr)->wall_img_ptr, width_now, height_now);
+			}
+			else
+				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
+					(*map_ptr)->dimg->img, width_now, height_now);
 			width_now += (*map_ptr)->img_width;
 		}
+		i = 0;
 		width_now = 0;
 		height_now += (*map_ptr)->img_height;
 	}
@@ -44,6 +56,7 @@ int	close_win(void *param)
 
 	map = param;
 	mlx_destroy_image(map->mlx_ptr, map->wall_img_ptr);
+	mlx_destroy_image(map->mlx_ptr, map->dimg->img);
 	//destroy other imgs
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);

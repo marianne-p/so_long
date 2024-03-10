@@ -36,12 +36,21 @@ enum {
 	ON_DESTROY = 17
 };
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int	bits_per_pixel;
+	int	line_length;
+	int	endian;
+}	t_data;
+
 typedef struct s_win
 {
     void    *mlx_ptr;
     t_list  **head_ptr;
     void    *win_ptr;
     void    *wall_img_ptr;
+	t_data	*dimg;
     int     width;
     int     height;
     int     img_width;
@@ -50,6 +59,7 @@ typedef struct s_win
 
 int	handle_error(char *error, int ernum);
 int verify_the_map(t_list *head);
+void    create_square(t_win *map);
 void create_map_win(t_win **map_ptr, t_list **head_ptr);
 int	close_win(void *param);
 int	handle_keys(int keysum, void *param);
