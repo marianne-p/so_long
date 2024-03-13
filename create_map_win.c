@@ -26,26 +26,29 @@ void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 {
 	size_t	i;
 	t_list	*head;
+	char	ch[1];
 
 	i = 0;
+	ch[0] = '1';
 	head = (*(*map_ptr)->head_ptr);
 	while (height_now < (*map_ptr)->height)
 	{
 		while (width_now < (*map_ptr)->width && i < ft_strlen((char *)head->content) - 1)
 		{
-			if ((ft_strncmp((&((char *)head->content)[i++]), "1", 1)) == 0)
+			if ((ft_strncmp((&((char *)head->content)[i++]), ch, 1)) == 0)
 			{
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
 					(*map_ptr)->wall_img_ptr, width_now, height_now);
 			}
 			else
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
-					(*map_ptr)->dimg->img, width_now, height_now);
-			width_now += (*map_ptr)->img_width;
+					(*map_ptr)->c_img->img, width_now, height_now);
+			width_now += TILE_SIDE;
 		}
 		i = 0;
+		head = head->next;
 		width_now = 0;
-		height_now += (*map_ptr)->img_height;
+		height_now += TILE_SIDE;
 	}
 	return (map_ptr);
 }
@@ -57,6 +60,7 @@ int	close_win(void *param)
 	map = param;
 	mlx_destroy_image(map->mlx_ptr, map->wall_img_ptr);
 	mlx_destroy_image(map->mlx_ptr, map->dimg->img);
+	mlx_destroy_image(map->mlx_ptr, map->c_img->img);
 	//destroy other imgs
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
@@ -64,6 +68,7 @@ int	close_win(void *param)
 	//ft_printf("Pointer to head %p\n", map->head_ptr);
 	ft_lstclear(map->head_ptr, free);
 	free(map->dimg);
+	free(map->c_img);
 	free(map);
 	return (1); //add FREEs if more alloc's done!
 }

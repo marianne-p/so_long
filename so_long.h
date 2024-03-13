@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:33:14 by mpihur            #+#    #+#             */
-/*   Updated: 2024/03/10 19:13:41 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:50:21 by mpihur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define SO_LONG_H
 
 # define TILE_SIDE 64
-# define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile027.xpm"
-# define ZERO_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/tile003.xpm"
+# define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/1.xpm"
+# define C_PATH "/home/mpihur/42CORE/so_long/xpm/char.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -51,6 +51,7 @@ typedef struct s_win
     void    *win_ptr;
     void    *wall_img_ptr;
 	t_data	*dimg;
+	t_data	*c_img;
     int     width;
     int     height;
     int     img_width;
@@ -63,5 +64,6 @@ void    create_square(t_win *map);
 void create_map_win(t_win **map_ptr, t_list **head_ptr);
 int	close_win(void *param);
 int	handle_keys(int keysum, void *param);
+void    create_collectible(t_win *map);
 
 #endif

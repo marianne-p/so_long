@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&head, ft_lstnew(line));
 	//create_the_map(head, NULL);
 	create_square(map);
+	create_collectible(map);
 	if (verify_the_map(head) != 0)
 		return (1);
 	create_map_win(&map, &head);

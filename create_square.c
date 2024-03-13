@@ -15,13 +15,12 @@ void    create_square(t_win *map)
     int x;
 
 	img = (t_data *)malloc(sizeof(t_data));
-    //if the t_data is not alloc'ed, would it be saved? is it malloced as part of t_win in main? 
     y = x = 0;
     img->img = mlx_new_image(map->mlx_ptr, TILE_SIDE, TILE_SIDE);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length, &img->endian);
-    while (y++ < TILE_SIDE * 0.96)
+    while (y++ <= TILE_SIDE)
 	{
-		while (x++ < TILE_SIDE * 0.96)
+		while (x++ <= TILE_SIDE)
 			my_mlx_pixel_put(img, x, y, 0x2F2E2F);
 		x = 0;
 	}
