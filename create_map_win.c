@@ -26,12 +26,9 @@ void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 {
 	size_t	i;
 	t_list	*head;
-	char	ch[3];
+	const char	ch[4] = "1PCE";
 
 	i = 0;
-	ch[0] = '1';
-	ch[1] = 'P';
-	ch[2] = 'C';
 	head = (*(*map_ptr)->head_ptr);
 	while (height_now < (*map_ptr)->height)
 	{
@@ -45,6 +42,8 @@ void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->p_img->img, width_now, height_now);
 			else if ((ft_strncmp((&((char *)head->content)[i]), &ch[2], 1)) == 0)
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->flower_img->img, width_now, height_now);
+			else if ((ft_strncmp((&((char *)head->content)[i]), &ch[3], 1)) == 0)
+				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->exit_img->img, width_now, height_now);
 			else
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->dimg->img, width_now, height_now);
 			i++;
@@ -67,6 +66,7 @@ int	close_win(void *param)
 	mlx_destroy_image(map->mlx_ptr, map->dimg->img);
 	mlx_destroy_image(map->mlx_ptr, map->p_img->img);
 	mlx_destroy_image(map->mlx_ptr, map->flower_img->img);
+	mlx_destroy_image(map->mlx_ptr, map->exit_img->img);
 	//destroy other imgs
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
@@ -76,6 +76,7 @@ int	close_win(void *param)
 	free(map->dimg);
 	free(map->p_img);
 	free(map->flower_img);
+	free(map->exit_img);
 	free(map);
 	return (1); //add FREEs if more alloc's done!
 }

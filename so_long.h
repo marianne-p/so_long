@@ -17,6 +17,7 @@
 # define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/1.xpm"
 # define PLAYER_PATH "/home/mpihur/42CORE/so_long/xpm/char.xpm"
 # define FLOWER_PATH "/home/mpihur/42CORE/so_long/xpm/flow.xpm"
+# define EXIT_PATH "/home/mpihur/42CORE/so_long/xpm/exit.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -54,6 +55,7 @@ typedef struct s_win
 	t_data	*dimg;
 	t_data	*p_img;
 	t_data	*flower_img;
+	t_data	*exit_img;
     int     width;
     int     height;
     int     img_width;
