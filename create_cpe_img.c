@@ -49,16 +49,21 @@ void    put_img_to_img(t_data *img, int x, int y)
 
 void    create_collectible(t_win *map)
 {
-	t_data	*c_img;
+	t_data	*p_img;
+    t_data  *flower_img;
     int y;
     int x;
 
-	c_img = (t_data *)malloc(sizeof(t_data));
+	p_img = (t_data *)malloc(sizeof(t_data));
+	flower_img = (t_data *)malloc(sizeof(t_data));
     y = x = 0;
-    c_img->img = mlx_xpm_file_to_image(map->mlx_ptr, C_PATH, &(map->img_width), &(map->img_height));
-	c_img->addr = mlx_get_data_addr(c_img->img, &c_img->bits_per_pixel,
-            &c_img->line_length, &c_img->endian);
+    p_img->img = mlx_xpm_file_to_image(map->mlx_ptr, PLAYER_PATH, &(map->img_width), &(map->img_height));
+	p_img->addr = mlx_get_data_addr(p_img->img, &p_img->bits_per_pixel, &p_img->line_length, &p_img->endian);
+    flower_img->img = mlx_xpm_file_to_image(map->mlx_ptr, FLOWER_PATH, &(map->img_width), &(map->img_height));
+	flower_img->addr = mlx_get_data_addr(flower_img->img, &flower_img->bits_per_pixel, &flower_img->line_length, &flower_img->endian);
 //    printf("%p\n%p\n", c_img->addr, map->dimg->addr);
-    put_img_to_img(c_img, x, y); 
-    map->c_img = c_img;
+    put_img_to_img(p_img, x, y);
+    put_img_to_img(flower_img, x, y);
+    map->p_img = p_img;
+    map->flower_img = flower_img;
 }

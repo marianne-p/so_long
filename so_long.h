@@ -15,7 +15,8 @@
 
 # define TILE_SIDE 64
 # define WALL_XPM_PATH "/home/mpihur/42CORE/so_long/xpm/1.xpm"
-# define C_PATH "/home/mpihur/42CORE/so_long/xpm/char.xpm"
+# define PLAYER_PATH "/home/mpihur/42CORE/so_long/xpm/char.xpm"
+# define FLOWER_PATH "/home/mpihur/42CORE/so_long/xpm/flow.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -51,7 +52,8 @@ typedef struct s_win
     void    *win_ptr;
     void    *wall_img_ptr;
 	t_data	*dimg;
-	t_data	*c_img;
+	t_data	*p_img;
+	t_data	*flower_img;
     int     width;
     int     height;
     int     img_width;
