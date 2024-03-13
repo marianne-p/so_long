@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	head = ft_lstnew(line);
 	while ((line =  get_next_line(fd)) != NULL)
 		ft_lstadd_back(&head, ft_lstnew(line));
-	create_the_map(head, NULL);
+	//create_the_map(head, NULL);
 	create_square(map);
 	if (verify_the_map(head) != 0)
 		return (1);

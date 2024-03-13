@@ -24,16 +24,16 @@
 
 void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
 {
-	int	i;
+	size_t	i;
 	t_list	*head;
 
 	i = 0;
 	head = (*(*map_ptr)->head_ptr);
 	while (height_now < (*map_ptr)->height)
 	{
-		while (width_now < (*map_ptr)->width)
+		while (width_now < (*map_ptr)->width && i < ft_strlen((char *)head->content) - 1)
 		{
-			if (((int *)head->content)[i++] == '1')
+			if ((ft_strncmp((&((char *)head->content)[i++]), "1", 1)) == 0)
 			{
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
 					(*map_ptr)->wall_img_ptr, width_now, height_now);
@@ -63,6 +63,7 @@ int	close_win(void *param)
 	free(map->mlx_ptr);
 	//ft_printf("Pointer to head %p\n", map->head_ptr);
 	ft_lstclear(map->head_ptr, free);
+	free(map->dimg);
 	free(map);
 	return (1); //add FREEs if more alloc's done!
 }
@@ -81,10 +82,10 @@ void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 {
 	(*map_ptr)->width = TILE_SIDE * (ft_strlen((char *)(*head_ptr)->content) - 1);
 	(*map_ptr)->height = TILE_SIDE * (ft_lstsize(*head_ptr));
+	(*map_ptr)->head_ptr = head_ptr;
 	//does lstsize give correct num?
 	if (window_image(map_ptr) == NULL)
 		return ;
 	if (put_images_to_win(map_ptr, 0, 0) == NULL)
 		return ; //are frees done before returning NULL?	
-	(*map_ptr)->head_ptr = head_ptr;
 }
