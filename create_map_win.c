@@ -88,6 +88,14 @@ int	handle_keys(int keysum, void *param)
 		close_win(param);
 		exit (1);
 	}
+	/*if (keysum == XK_w || keysum == XK_Up)
+		//move up
+	if (keysum == XK_s || keysum == XK_Down)
+		//move down
+	if (keysum == XK_a || keysum == XK_Left)
+		//move left
+	if (keysum == XK_d || keysum == XK_Right)
+		//move right*/
 	return (0);
 }
 
