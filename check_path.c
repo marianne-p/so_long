@@ -25,6 +25,7 @@ int     find_player(t_list  **temp, int i)
             i++;
         }
         *temp = (*temp)->next;
+        i = 0;
     }
     return (-1);
 }
@@ -35,29 +36,38 @@ void    verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
         return ;
     /*moving left*/
     prev = find_prev_node(*temp, *head);
-    if (i - 1 >= 0 && ft_strncmp(&((char *)(*temp)->content)[i - 1], "1", 1) != 0)
+    if (i > 0 && (((char *)(*temp)->content)[i - 1]) && ft_strncmp(&((char *)(*temp)->content)[i - 1], "1", 1) != 0 && ft_strncmp(&((char *)(*temp)->content)[i - 1], "V", 1) != 0)
     {
-        ((char *)(*temp)->content)[i - 1] = 'V';
+        ((char *)((*temp)->content))[i - 1] = 'V';
+        ft_printf("Moving to [%d]: %s", i, (char *)(*temp)->content);
         verify_head_path(temp, head, i - 1, NULL);
+        //return ;
     }
     /*moving right*/
-    if (i + 1 < ((int)ft_strlen((char *)(*temp)->content) - 1) && ft_strncmp(&((char *)(*temp)->content)[i + 1], "1", 1) != 0)
+    if (i + 1 < ((int)ft_strlen((char *)(*temp)->content) - 1) && ft_strncmp(&((char *)(*temp)->content)[i + 1], "1", 1) != 0 && ft_strncmp(&((char *)(*temp)->content)[i + 1], "V", 1) != 0)
     {
         ((char *)(*temp)->content)[i + 1] = 'V';
+        ft_printf("Moving to [%d], right: %s", i, (char *)(*temp)->content);
         verify_head_path(temp, head, i + 1, NULL);
+        //return ;
     }
     /*moving down*/
-    if ((*temp)->next != NULL && ft_strncmp(&((char *)(*temp)->next->content)[i], "1", 1) != 0)
+    if ((*temp)->next != NULL && ft_strncmp(&((char *)(*temp)->next->content)[i], "1", 1) != 0 && ft_strncmp(&((char *)(*temp)->next->content)[i], "V", 1) != 0)
     {
         ((char *)(*temp)->next->content)[i] = 'V';
+        ft_printf("Moving to [%d], down: %s", i, (char *)(*temp)->next->content);
         verify_head_path(&((*temp)->next), head, i, NULL);
+        //return ;
     }
     /*moving up*/
-    if (prev != NULL && ft_strncmp(&((char *)(prev->content))[i], "1", 1) != 0)
+    if (prev != NULL && ft_strncmp(&((char *)(prev->content))[i], "1", 1) != 0 && ft_strncmp(&((char *)prev->content)[i], "V", 1) != 0)
     {
         ((char *)(prev->content))[i] = 'V';
+        ft_printf("Moving to [%d], up: %s", i, (char *)prev->content);
         verify_head_path(&prev, head, i, NULL);
+        //return ;
     }
+    return ;
 }
 
 int     check_the_path(t_list *head)
