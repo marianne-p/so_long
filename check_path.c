@@ -70,6 +70,25 @@ void    verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
     return ;
 }
 
+int     check_cpe(t_list **head, const char *list, int i, int j)
+{
+    t_list  *temp;
+
+    temp = *head;
+    while (i < 3)
+    {
+        while (((char *)temp->content)[j])
+        {
+            if (ft_strncmp(&list[i], &((char *)temp->content)[j], 1) == 0)
+                exit (handle_error("No path to Exit or Collectible", 1));
+            j++;
+        }
+        i++;
+        temp = *head;
+    }
+    return (0);
+}
+
 int     check_the_path(t_list *head)
 {
     t_list  *temp;
@@ -83,11 +102,14 @@ int     check_the_path(t_list *head)
     }
     temp = head_cpy;
     verify_head_path(&temp, &head_cpy, find_player(&temp, 0), NULL);
+    temp = head_cpy;
+    check_cpe(&temp, "CPE", 0, 0);
     while (head_cpy != NULL)
     {
         ft_printf("%s", head_cpy->content);
         head_cpy = head_cpy->next;
     }
     /*CHANGE!!*/
-    return (1);
+    ft_lstclear(&temp, free);
+    return (0);
 }
