@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	//create_the_map(head, NULL);
 	create_square(map);
 	create_collectible(map);
-	if (verify_the_map(head) != 0)
+	if (verify_the_map(head, 0) != 0)
 		return (1);
 	create_map_win(&map, &head);
 	mlx_key_hook(map->win_ptr, &handle_keys, (void *)map);

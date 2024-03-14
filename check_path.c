@@ -11,35 +11,47 @@ t_list  *find_prev_node(t_list  *temp, t_list *head)
     return (NULL);
 }
 
-int     find_player(t_list  **temp)
+int     find_player(t_list  **temp, int i)
 {
-
+    while (*temp != NULL)
+    {
+        while (i < (int)ft_strlen((*temp)->content) - 1)
+        {
+            if (ft_strncmp(&((char *)(*temp)->content)[i], "P", 1) == 0)
+                return (i);
+            i++;
+        }
+        *temp = (*temp)->next;
+    }
+    return (-1);
 }
 
 void    verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
 {
+    if (i == -1 || (*temp) == NULL)
+        return ;
     /*moving left*/
-    if (i - 1 >= 0 && ft_strncmp(((int *)(*temp)->content)[i - 1], "1", 1) != 0)
+    if (i - 1 >= 0 && ft_strncmp(&((char *)(*temp)->content)[i - 1], "1", 1) != 0)
     {
-        ((int *)(*temp)->content)[i - 1] = "V";
+        ((char *)(*temp)->content)[i - 1] = 'V';
         verify_head_path(temp, head, i - 1, find_prev_node(*temp, *head));
     }
     /*moving right*/
-    if (i + 1 < (ft_strlen((char *)(*temp)->content) - 1) && ft_strncmp(((int *)(*temp)->content)[i + 1], "1", 1) != 0)
+    if (i + 1 < ((int)ft_strlen((char *)(*temp)->content) - 1) && ft_strncmp(&((char *)(*temp)->content)[i + 1], "1", 1) != 0)
     {
-        ((int *)(*temp)->content)[i + 1] = "V";
+        ((char *)(*temp)->content)[i + 1] = 'V';
         verify_head_path(temp, head, i + 1, find_prev_node(*temp, *head));
     }
     /*moving down*/
-    if ((*temp)->next != NULL && ft_strncmp(((int *)(*temp)->next->content)[i], "1", 1) != 0)
+    if ((*temp)->next != NULL && ft_strncmp(&((char *)(*temp)->next->content)[i], "1", 1) != 0)
     {
-        ((int *)(*temp)->next->content)[i] = "V";
+        ((char *)(*temp)->next->content)[i] = 'V';
         verify_head_path(&((*temp)->next), head, i, find_prev_node(*temp, *head));
     }
     /*moving up*/
-    if (prev != NULL && ft_strncmp(((int *)(prev->content))[i], "1", 1) != 0)
+    if (prev != NULL && ft_strncmp(&((char *)(prev->content))[i], "1", 1) != 0)
     {
-        ((int *)(prev->content))[i] = "V";
+        ((char *)(prev->content))[i] = 'V';
         verify_head_path(&prev, head, i, find_prev_node(prev, *head));
     }
 }
@@ -56,5 +68,12 @@ int     check_the_path(t_list *head)
         ft_lstadd_back(&head_cpy, ft_lstnew(ft_strdup(head->content)));
     }
     temp = head_cpy;
-    verify_head_path(&temp, &head_cpy, find_player(&temp), find_prev_node(temp, head_cpy));
+    verify_head_path(&temp, &head_cpy, find_player(&temp, 0), find_prev_node(temp, head_cpy));
+    while (head != NULL)
+    {
+        ft_printf("%d\n", head->content);
+        head = head->next;
+    }
+    /*CHANGE!!*/
+    return (1);
 }

@@ -28,16 +28,6 @@
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
 
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
-
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
@@ -63,11 +53,15 @@ typedef struct s_win
 } t_win;
 
 int	handle_error(char *error, int ernum);
-int verify_the_map(t_list *head);
+int verify_the_map(t_list *head, int res);
+int     check_the_path(t_list *head);
+/**/
 void    create_square(t_win *map);
+void    create_collectible(t_win *map);
+/**/
 void create_map_win(t_win **map_ptr, t_list **head_ptr);
 int	close_win(void *param);
+/**/
 int	handle_keys(int keysum, void *param);
-void    create_collectible(t_win *map);
 
 #endif
