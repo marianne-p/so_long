@@ -38,9 +38,9 @@ t_list  *check_and_change(t_win *map, int v, t_list *temp, t_list *prev)
     int     i;
 
     temp = (*(map->head_ptr));
-    ft_printf("%s\n", temp->content);
+    //ft_printf("%s\n", temp->content);
     i = find_player(&temp, 0);
-    ft_printf("%s\n", temp->content);
+    //ft_printf("%s\n", temp->content);
     //ft_printf("%d\n", i);
     if (i < 0)
         return (NULL);

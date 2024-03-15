@@ -78,7 +78,7 @@ int	close_win(void *param)
 	free(map->flower_img);
 	free(map->exit_img);
 	free(map);
-	return (1); //add FREEs if more alloc's done!
+	exit (1); //add FREEs if more alloc's done!
 }
 
 int	handle_keys(int keysum, void *param)
