@@ -19,13 +19,13 @@ int     find_player(t_list  **temp, int i)
         {
             if (ft_strncmp(&((char *)(*temp)->content)[i], "P", 1) == 0)
             {
-                ft_printf("%s, %c, %d\n", ((char *)(*temp)->content), ((char *)(*temp)->content)[i], i);
+                //ft_printf("%s, %c, %d\n", ((char *)(*temp)->content), ((char *)(*temp)->content)[i], i);
                 return (i);
             }
-            ft_printf("i=%d, ", i);
+            //ft_printf("i=%d, ", i);
             i++;
         }
-        ft_printf("Line is %s\n, ", (char *)(*temp)->content);
+        //ft_printf("Line is %s\n, ", (char *)(*temp)->content);
         *temp = (*temp)->next;
         i = 0;
     }

@@ -89,15 +89,16 @@ int	handle_keys(int keysum, void *param)
 		exit (1);
 	}
 	if (keysum == XK_w || keysum == XK_Up)
-	{
 		put_images_to_win((t_win **)&param, check_and_change(((t_win *)param), 4, NULL, NULL), 0, 0);
-	}
-		//move up
-	//if (keysum == XK_s || keysum == XK_Down) ;
-		//move down
-	//if (keysum == XK_a || keysum == XK_Left) ;
+	//move up
+	if (keysum == XK_s || keysum == XK_Down)
+		put_images_to_win((t_win **)&param, check_and_change(((t_win *)param), 3, NULL, NULL), 0, 0);
+	//move down
+	if (keysum == XK_a || keysum == XK_Left)
+		put_images_to_win((t_win **)&param, check_and_change(((t_win *)param), 2, NULL, NULL), 0, 0);
 		//move left
-	//if (keysum == XK_d || keysum == XK_Right) ;
+	if (keysum == XK_d || keysum == XK_Right)
+		put_images_to_win((t_win **)&param, check_and_change(((t_win *)param), 1, NULL, NULL), 0, 0);
 		//move right*
 	return (0);
 }
