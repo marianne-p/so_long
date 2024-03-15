@@ -22,14 +22,14 @@
 	return (*map_ptr);
  }
 
-void	*put_images_to_win(t_win **map_ptr, int height_now, int width_now)
+void	*put_images_to_win(t_win **map_ptr, t_list *head, int height_now, int width_now)
 {
 	size_t	i;
-	t_list	*head;
-	const char	ch[4] = "1PCE";
+	//t_list	*head;
+	const char	ch[5] = "1PCE0";
 
 	i = 0;
-	head = (*(*map_ptr)->head_ptr);
+	//head = (*(*map_ptr)->head_ptr);
 	while (height_now < (*map_ptr)->height)
 	{
 		while (width_now < (*map_ptr)->width && i < ft_strlen((char *)head->content) - 1)
@@ -88,14 +88,17 @@ int	handle_keys(int keysum, void *param)
 		close_win(param);
 		exit (1);
 	}
-	/*if (keysum == XK_w || keysum == XK_Up)
+	if (keysum == XK_w || keysum == XK_Up)
+	{
+		put_images_to_win((t_win **)&param, check_and_change(((t_win *)param), 4, NULL, NULL), 0, 0);
+	}
 		//move up
-	if (keysum == XK_s || keysum == XK_Down)
+	//if (keysum == XK_s || keysum == XK_Down) ;
 		//move down
-	if (keysum == XK_a || keysum == XK_Left)
+	//if (keysum == XK_a || keysum == XK_Left) ;
 		//move left
-	if (keysum == XK_d || keysum == XK_Right)
-		//move right*/
+	//if (keysum == XK_d || keysum == XK_Right) ;
+		//move right*
 	return (0);
 }
 
@@ -104,9 +107,10 @@ void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 	(*map_ptr)->width = TILE_SIDE * (ft_strlen((char *)(*head_ptr)->content) - 1);
 	(*map_ptr)->height = TILE_SIDE * (ft_lstsize(*head_ptr));
 	(*map_ptr)->head_ptr = head_ptr;
+	(*map_ptr)->moves = 0;
 	//does lstsize give correct num?
 	if (window_image(map_ptr) == NULL)
 		return ;
-	if (put_images_to_win(map_ptr, 0, 0) == NULL)
+	if (put_images_to_win(map_ptr, *((*map_ptr)->head_ptr), 0, 0) == NULL)
 		return ; //are frees done before returning NULL?	
 }

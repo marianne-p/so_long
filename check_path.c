@@ -19,15 +19,17 @@ int     find_player(t_list  **temp, int i)
         {
             if (ft_strncmp(&((char *)(*temp)->content)[i], "P", 1) == 0)
             {
-                //ft_printf("%s\n, %c", ((char *)(*temp)->content), ((char *)(*temp)->content)[i]);
+                ft_printf("%s, %c, %d\n", ((char *)(*temp)->content), ((char *)(*temp)->content)[i], i);
                 return (i);
             }
+            ft_printf("i=%d, ", i);
             i++;
         }
+        ft_printf("Line is %s\n, ", (char *)(*temp)->content);
         *temp = (*temp)->next;
         i = 0;
     }
-    return (-1);
+    return (i);
 }
 
 void    verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
