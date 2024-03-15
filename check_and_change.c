@@ -2,7 +2,7 @@
 
 t_list  *mv_up(t_win *map, t_list *temp, t_list *prev, int i)
 {
-    ft_printf("Move up\n");
+    //ft_printf("Move up\n");
     //if Exit, check whether all Collected
     ((char *)temp->content)[i] = '0';
     ((char *)prev->content)[i] = 'P';
@@ -13,7 +13,7 @@ t_list  *mv_up(t_win *map, t_list *temp, t_list *prev, int i)
 
 t_list  *mv_down(t_win *map, t_list *temp, int i)
 {
-    ft_printf("Move down\n");
+    //ft_printf("Move down\n");
     //Exit triger check
     ((char *)temp->content)[i] = '0';
     ((char *)temp->next->content)[i] = 'P';
@@ -24,7 +24,7 @@ t_list  *mv_down(t_win *map, t_list *temp, int i)
 
 t_list  *mv_rl(t_win *map, t_list *temp, int i, int j)
 {
-    ft_printf("Move r/left\n");
+    //ft_printf("Move r/left\n");
     //Exit triger check
     ((char *)temp->content)[i] = '0';
     ((char *)temp->content)[j] = 'P';

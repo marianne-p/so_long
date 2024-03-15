@@ -2,7 +2,7 @@ NAME	:= so_long
 CC	:= gcc
 GNL	:= get_next_line/
 SRCS	:= main.c verify_the_map.c check_path.c \
-	   create_map_win.c create_square.c create_cpe_img.c check_and_change.c \
+	   create_map_win.c create_square.c create_cpe_img.c check_and_change.c check_collectibles.c\
 	   $(GNL)get_next_line.c $(GNL)get_next_line_utils.c	   
 OBJ := $(SRCS:.c=.o)
 CFLAGS := -Wall -Wextra -Werror -g

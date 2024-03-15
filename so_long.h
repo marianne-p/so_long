@@ -62,6 +62,7 @@ void    create_collectible(t_win *map);
 /**/
 void create_map_win(t_win **map_ptr, t_list **head_ptr);
 t_list  *check_and_change(t_win *map, int v, t_list *temp, t_list *prev);
+int check_collectibles(t_list *head, int i, int count);
 void	*put_images_to_win(t_win **map_ptr, t_list *head, int height_now, int width_now);
 int	close_win(void *param);
 /**/

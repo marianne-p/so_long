@@ -42,7 +42,7 @@ void	*put_images_to_win(t_win **map_ptr, t_list *head, int height_now, int width
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->p_img->img, width_now, height_now);
 			else if ((ft_strncmp((&((char *)head->content)[i]), &ch[2], 1)) == 0)
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->flower_img->img, width_now, height_now);
-			else if ((ft_strncmp((&((char *)head->content)[i]), &ch[3], 1)) == 0)
+			else if (check_collectibles(head, 0, 0) == 0 && (ft_strncmp((&((char *)head->content)[i]), &ch[3], 1)) == 0)
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->exit_img->img, width_now, height_now);
 			else
 				mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr, (*map_ptr)->dimg->img, width_now, height_now);
