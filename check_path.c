@@ -18,14 +18,9 @@ int     find_player(t_list  **temp, int i, char s)
         while (i < (int)ft_strlen((*temp)->content) - 1)
         {
             if (ft_strncmp(&((char *)(*temp)->content)[i], &s, 1) == 0)
-            {
-                //ft_printf("%s, %c, %d\n", ((char *)(*temp)->content), ((char *)(*temp)->content)[i], i);
                 return (i);
-            }
-            //ft_printf("i=%d, ", i);
             i++;
         }
-        //ft_printf("Line is %s\n, ", (char *)(*temp)->content);
         *temp = (*temp)->next;
         i = 0;
     }
