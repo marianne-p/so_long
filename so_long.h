@@ -51,6 +51,7 @@ typedef struct s_win
     int     img_width;
     int     img_height;
 	int		moves;
+	t_list	*exit_cpy;
 } t_win;
 
 int	handle_error(char *error, int ernum);
@@ -62,12 +63,13 @@ void    create_collectible(t_win *map);
 /**/
 void create_map_win(t_win **map_ptr, t_list **head_ptr);
 t_list  *check_and_change(t_win *map, int v, t_list *temp, t_list *prev);
+int exit_or_noexit(char *tile, t_win *map);
 int check_collectibles(t_list *head, int i, int count);
 void	*put_images_to_win(t_win **map_ptr, t_list *head, int height_now, int width_now);
 int	close_win(void *param);
 /**/
 int	handle_keys(int keysum, void *param);
-int     find_player(t_list  **temp, int i);
+int     find_player(t_list  **temp, int i, char s);
 t_list  *find_prev_node(t_list  *temp, t_list *head);
 
 #endif

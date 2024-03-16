@@ -11,13 +11,13 @@ t_list  *find_prev_node(t_list  *temp, t_list *head)
     return (NULL);
 }
 
-int     find_player(t_list  **temp, int i)
+int     find_player(t_list  **temp, int i, char s)
 {
     while (*temp != NULL)
     {
         while (i < (int)ft_strlen((*temp)->content) - 1)
         {
-            if (ft_strncmp(&((char *)(*temp)->content)[i], "P", 1) == 0)
+            if (ft_strncmp(&((char *)(*temp)->content)[i], &s, 1) == 0)
             {
                 //ft_printf("%s, %c, %d\n", ((char *)(*temp)->content), ((char *)(*temp)->content)[i], i);
                 return (i);
@@ -103,7 +103,7 @@ int     check_the_path(t_list *head)
         ft_lstadd_back(&head_cpy, ft_lstnew(ft_strdup(head->content)));
     }
     temp = head_cpy;
-    verify_head_path(&temp, &head_cpy, find_player(&temp, 0), NULL);
+    verify_head_path(&temp, &head_cpy, find_player(&temp, 0, 'P'), NULL);
     temp = head_cpy;
     check_cpe(&temp, "CPE", 0, 0);
     /*while (head_cpy != NULL)

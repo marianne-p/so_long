@@ -73,6 +73,7 @@ int	close_win(void *param)
 	free(map->mlx_ptr);
 	//ft_printf("Pointer to head %p\n", map->head_ptr);
 	ft_lstclear(map->head_ptr, free);
+	ft_lstclear(&(map->exit_cpy), free);
 	free(map->dimg);
 	free(map->p_img);
 	free(map->flower_img);
@@ -105,10 +106,22 @@ int	handle_keys(int keysum, void *param)
 
 void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 {
+    t_list  *head_cpy;
+	t_list	*head;
+
+	head = *head_ptr;
+    head_cpy = ft_lstnew(ft_strdup((*head_ptr)->content));
+    while (head->next != NULL)
+    {
+        head = head->next;
+        ft_lstadd_back(&head_cpy, ft_lstnew(ft_strdup(head->content)));
+    }
+	head = *head_ptr;
 	(*map_ptr)->width = TILE_SIDE * (ft_strlen((char *)(*head_ptr)->content) - 1);
 	(*map_ptr)->height = TILE_SIDE * (ft_lstsize(*head_ptr));
 	(*map_ptr)->head_ptr = head_ptr;
 	(*map_ptr)->moves = 0;
+	(*map_ptr)->exit_cpy = head_cpy;
 	//does lstsize give correct num?
 	if (window_image(map_ptr) == NULL)
 		return ;
