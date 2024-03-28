@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*	                                                                        */
+/*	                                                    :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*	                                                +:+ +:+         +:+     */
+/*   By: mpihur <marvin@42.fr>	                  +#+  +:+       +#+        */
+/*	                                            +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/28 17:05:12 by mpihur	        #+#    #+#             */
+/*   Updated: 2024/03/28 17:12:19 by mpihur           ###   ########.fr       */
+/*	                                                                        */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	handle_error(char *error, int ernum)
@@ -11,7 +23,6 @@ void	create_the_map(t_list *head, char **map)
 	map = (char **)malloc(ft_lstsize(head) * sizeof(char *));
 	if (!map)
 		exit(handle_error("Map alloc in create_the_map:", 1));
-	//ft_printf("%d\n", i);
 	while (head != NULL && head->content != NULL)
 	{
 		ft_printf("%s", head->content);
@@ -20,10 +31,31 @@ void	create_the_map(t_list *head, char **map)
 	free(map);
 }
 
+static t_list	*init_game(char **argv, t_win **map, t_list *head)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+		exit(handle_error("Fd issue", 1));
+	line = get_next_line(fd);
+	head = ft_lstnew(line);
+	while (line != NULL)
+	{
+		ft_lstadd_back(&head, ft_lstnew(line));
+		line = get_next_line(fd);
+	}
+	create_square(*map);
+	create_collectible(*map);
+	if (verify_the_map(head, 0) != 0)
+		return (1);
+	create_map_win(map, &head);
+	return (head);
+}
+
 int	main(int argc, char **argv)
 {
-	int	fd;
-	char	*line;
 	t_list	*head;
 	t_win	*map;
 
@@ -35,24 +67,13 @@ int	main(int argc, char **argv)
 		return (handle_error("Mlx_ptr init: ", 1));
 	if (argc != 2)
 		exit(write(2, "Check args\n", 11));
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 0)
-		exit(handle_error("Fd issue", 1));
-	line = get_next_line(fd);
-	head = ft_lstnew(line);
-	while ((line =  get_next_line(fd)) != NULL)
-		ft_lstadd_back(&head, ft_lstnew(line));
-	create_square(map);
-	create_collectible(map);
-	if (verify_the_map(head, 0) != 0)
-		return (1);
-	create_map_win(&map, &head);
+	head = init_game(argv, &map, NULL);
 	mlx_key_hook(map->win_ptr, &handle_keys, (void *)map);
-	mlx_hook(map->win_ptr, DestroyNotify,  ButtonReleaseMask, &close_win, (void *)map);
+	mlx_hook(map->win_ptr, DestroyNotify, ButtonReleaseMask,
+		&close_win, (void *)map);
 	mlx_loop(map->mlx_ptr);
 	ft_printf("Going to lstclear in main()");
 	ft_lstclear(&head, free);
 	free(map);
-	//ft_printf("%p\n", head);
 	return (0);
 }
