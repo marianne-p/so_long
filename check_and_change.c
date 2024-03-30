@@ -45,6 +45,14 @@ t_list	*mv_rl(t_win *map, t_list *temp, int i, int j)
 	return (*(map->head_ptr));
 }
 
+void	print_the_moves(t_win *map)
+{
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 10, 12, 0xFFFF00, "count =");
+	map->str = ft_itoa(map->moves);
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 80, 12, 0xFFFF00, map->str);	
+	free(map->str);
+}
+
 t_list	*check_and_change(t_win *map, int v, t_list *temp, t_list *prev)
 {
 	int	i;
@@ -63,5 +71,6 @@ t_list	*check_and_change(t_win *map, int v, t_list *temp, t_list *prev)
 		return (mv_rl(map, temp, i, i - 1));
 	if (v == 1 && ft_strncmp(&((char *)temp->content)[i + 1], "1", 1) != 0)
 		return (mv_rl(map, temp, i, i + 1));
+	print_the_moves(map);
 	return (*(map->head_ptr));
 }

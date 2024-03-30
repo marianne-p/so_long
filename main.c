@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>	                  +#+  +:+       +#+        */
 /*	                                            +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:05:12 by mpihur	        #+#    #+#             */
-/*   Updated: 2024/03/28 17:13:01 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/03/30 13:19:49 by mpihur           ###   ########.fr       */
 /*	                                                                        */
 /* ************************************************************************** */
 
@@ -35,21 +35,33 @@ static t_list	*init_game(char **argv, t_win **map, t_list *head)
 {
 	char	*line;
 	int		fd;
+	t_list	*temp;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		exit(handle_error("Fd issue", 1));
 	line = get_next_line(fd);
 	head = ft_lstnew(line);
+	ft_printf("Read str\n");
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		ft_lstadd_back(&head, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
+	temp = head;
+	while (temp)
+	{
+		ft_printf("%s", (char *)temp->content);
+		temp = temp->next;
+	}
+	ft_printf("End of loop\n");
+	close(fd);
+	(*map)->head_ptr = &head;
 	create_square(*map);
 	create_collectible(*map);
 	if (verify_the_map(head, 0) != 0)
-		return (1);
+		exit (close_win(*map));
 	create_map_win(map, &head);
 	return (head);
 }

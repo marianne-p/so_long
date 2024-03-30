@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:00:28 by mpihur            #+#    #+#             */
-/*   Updated: 2024/03/28 17:01:15 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/03/30 13:19:55 by mpihur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	close_win(void *param)
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
-	ft_lstclear(map->head_ptr, free);
 	ft_lstclear(&(map->exit_cpy), free);
+	ft_lstclear(map->head_ptr, free);
 	free(map->dimg);
 	free(map->p_img);
 	free(map->flower_img);

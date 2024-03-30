@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>	                  +#+  +:+       +#+        */
 /*	                                            +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:33:14 by mpihur	        #+#    #+#             */
-/*   Updated: 2024/03/28 17:16:51 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/03/30 13:28:58 by mpihur           ###   ########.fr       */
 /*	                                                                        */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ typedef struct s_win
 	int		img_width;
 	int		img_height;
 	int		moves;
+	char	*str;
 	t_list	*exit_cpy;
 }	t_win;
 
 int		handle_error(char *error, int ernum);
 int		verify_the_map(t_list *head, int res);
+void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev);
 int		check_the_path(t_list *head);
 int		check_cpe(t_list **head, const char *list, int i, int j);
 /**/
@@ -67,6 +69,7 @@ void	create_collectible(t_win *map);
 /**/
 void	create_map_win(t_win **map_ptr, t_list **head_ptr);
 t_list	*check_and_change(t_win *map, int v, t_list *temp, t_list *prev);
+void	print_the_moves(t_win *map);
 int		exit_or_noexit(char *tile, t_win *map);
 int		check_collectibles(t_list *head, int i, int count);
 void	*put_images_to_win(t_win **map_ptr, t_list *head);
