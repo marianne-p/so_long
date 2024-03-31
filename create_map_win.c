@@ -117,8 +117,6 @@ void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 
 	head = *head_ptr;
 	head_cpy = ft_lstnew(ft_strdup((*head_ptr)->content));
-	ft_printf("COPY STR\n");
-	ft_printf("%s", (char *)head_cpy->content);
 	(*map_ptr)->exit_cpy = head_cpy;
 	while (head->next != NULL)
 	{

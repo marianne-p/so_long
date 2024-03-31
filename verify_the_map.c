@@ -92,21 +92,21 @@ int	has_walls(t_list *head, int i, t_list *last, int len)
 3. Surrounded by walls.
 4. Valid path to collectibles and exit.
 */
-int	verify_the_map(t_list *head, int res)
+int	verify_the_map(t_list *head, int res, t_win *map)
 {
 	if (is_rectangular(head) != 0)
-		exit(handle_error("Map not rectangular", 1));
+		exit(handle_error_and_free("Map not rectangular", 1, map));
 	if (contains_ecp(head) != 0)
 		exit(1);
 	if (has_walls(head, 0, ft_lstlast(head), ft_strlen(head->content)) != 0)
-		exit(handle_error("No walls: ", 1));
+		exit(handle_error_and_free("No walls: ", 1, map));
 	res = check_the_path(head);
 	if (res > 0)
 	{
 		if (res == 1)
-			exit(handle_error("No path to EXIT", 1));
+			exit(handle_error_and_free("No path to EXIT", 1, map));
 		else
-			exit(handle_error("No path to Collectible", 1));
+			exit(handle_error_and_free("No path to Collectible", 1, map));
 	}
 	return (0);
 }

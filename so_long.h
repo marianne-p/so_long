@@ -59,7 +59,8 @@ typedef struct s_win
 }	t_win;
 
 int		handle_error(char *error, int ernum);
-int		verify_the_map(t_list *head, int res);
+int		verify_the_map(t_list *head, int res, t_win *map);
+int		handle_error_and_free(char *error, int ernum, t_win *map);
 void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev);
 int		check_the_path(t_list *head);
 int		check_cpe(t_list **head, const char *list, int i, int j);

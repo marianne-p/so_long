@@ -27,10 +27,32 @@ int	close_win(void *param)
 	free(map->mlx_ptr);
 	ft_lstclear(&(map->exit_cpy), free);
 	ft_lstclear(map->head_ptr, free);
+//	free(map->wall_img_ptr);
 	free(map->dimg);
 	free(map->p_img);
 	free(map->flower_img);
 	free(map->exit_img);
 	free(map);
 	exit (1);
+}
+
+int	handle_error_and_free(char *error, int ernum, t_win *map)
+{
+	//mlx_destroy_image(map->mlx_ptr, map->wall_img_ptr);
+	mlx_destroy_image(map->mlx_ptr, map->dimg->img);
+	mlx_destroy_image(map->mlx_ptr, map->p_img->img);
+	mlx_destroy_image(map->mlx_ptr, map->flower_img->img);
+	mlx_destroy_image(map->mlx_ptr, map->exit_img->img);
+	//mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	mlx_destroy_display(map->mlx_ptr);
+	free(map->mlx_ptr);
+	//ft_lstclear(&(map->exit_cpy), free);
+	ft_lstclear(map->head_ptr, free);
+	free(map->dimg);
+	free(map->p_img);
+	free(map->flower_img);
+	free(map->exit_img);
+	free(map);
+	perror(error);
+	return (ernum);
 }
