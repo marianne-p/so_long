@@ -79,7 +79,7 @@ void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
 	return ;
 }
 
-int	check_the_path(t_list *head)
+int	check_the_path(t_list *head, int ret)
 {
 	t_list	*temp;
 	t_list	*head_cpy;
@@ -93,7 +93,7 @@ int	check_the_path(t_list *head)
 	temp = head_cpy;
 	verify_head_path(&temp, &head_cpy, find_player(&temp, 0, 'P'), NULL);
 	temp = head_cpy;
-	check_cpe(&temp, "CPE", 0, 0);
+	ret = check_cpe(&temp, 0, 0);
 	ft_lstclear(&temp, free);
-	return (0);
+	return (ret);
 }

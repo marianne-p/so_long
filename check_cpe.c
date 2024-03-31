@@ -12,21 +12,25 @@
 
 #include "so_long.h"
 
-int	check_cpe(t_list **head, const char *list, int i, int j)
+int	check_cpe(t_list **head, int i, int j)
 {
 	t_list	*temp;
+	int		count;
 
+	count = 0;
 	temp = *head;
-	while (i < 3)
+	while (temp)
 	{
-		while (((char *)temp->content)[j])
+		while (((char *)temp->content)[j + 1])
 		{
-			if (ft_strncmp(&list[i], &((char *)temp->content)[j], 1) == 0)
-				exit (handle_error("No path to Exit or Collectible", 1));
+			if (ft_strncmp("V", &((char *)temp->content)[j], 1) != 0
+				&& ft_strncmp("1", &((char *)temp->content)[j], 1) != 0)
+				count++;
 			j++;
 		}
 		i++;
-		temp = *head;
+		j = 0;
+		temp = temp->next;
 	}
-	return (0);
+	return (count);
 }

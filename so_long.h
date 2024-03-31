@@ -62,8 +62,8 @@ int		handle_error(char *error, int ernum);
 int		verify_the_map(t_list *head, int res, t_win *map);
 int		handle_error_and_free(char *error, int ernum, t_win *map);
 void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev);
-int		check_the_path(t_list *head);
-int		check_cpe(t_list **head, const char *list, int i, int j);
+int		check_the_path(t_list *head, int ret);
+int		check_cpe(t_list **head, int i, int j);
 /**/
 void	create_square(t_win *map);
 void	create_collectible(t_win *map);
