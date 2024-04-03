@@ -75,6 +75,12 @@ static void	images(t_data *p_img, t_data *flower_img,
 			&(map->img_width), &(map->img_height));
 	exit_img->addr = mlx_get_data_addr(exit_img->img, &exit_img->bits_per_pixel,
 			&exit_img->line_length, &exit_img->endian);
+	put_img_to_img(p_img, 0, 0);
+	put_img_to_img(flower_img, 0, 0);
+	put_img_to_img(exit_img, 0, 0);
+	map->p_img = p_img;
+	map->flower_img = flower_img;
+	map->exit_img = exit_img;
 }
 
 void	create_collectible(t_win *map)
@@ -82,21 +88,23 @@ void	create_collectible(t_win *map)
 	t_data	*p_img;
 	t_data	*flower_img;
 	t_data	*exit_img;
-	int		y;
-	int		x;
 
 	p_img = (t_data *)malloc(sizeof(t_data));
 	flower_img = (t_data *)malloc(sizeof(t_data));
 	exit_img = (t_data *)malloc(sizeof(t_data));
-	if (p_img == NULL || flower_img == NULL || exit_img == NULL)
+	map->enemy_fst = (t_data *)malloc(sizeof(t_data));
+	map->enemy_snd = (t_data *)malloc(sizeof(t_data));
+	if (p_img == NULL || flower_img == NULL || exit_img == NULL || map->enemy_fst == NULL || map->enemy_snd == NULL)
 		return ;
-	y = 0;
-	x = 0;
 	images(p_img, flower_img, exit_img, map);
-	put_img_to_img(p_img, x, y);
-	put_img_to_img(flower_img, x, y);
-	put_img_to_img(exit_img, x, y);
-	map->p_img = p_img;
-	map->flower_img = flower_img;
-	map->exit_img = exit_img;
+	map->enemy_fst->img = mlx_xpm_file_to_image(map->mlx_ptr, ENEMY_1,
+			&(map->img_width), &(map->img_height));
+	map->enemy_fst->addr = mlx_get_data_addr(map->enemy_fst->img, &map->enemy_fst->bits_per_pixel,
+			&map->enemy_fst->line_length, &map->enemy_fst->endian);
+	map->enemy_snd->img = mlx_xpm_file_to_image(map->mlx_ptr, ENEMY_2,
+			&(map->img_width), &(map->img_height));
+	map->enemy_snd->addr = mlx_get_data_addr(map->enemy_snd->img, &map->enemy_snd->bits_per_pixel,
+			&map->enemy_snd->line_length, &map->enemy_snd->endian);
+	put_img_to_img(map->enemy_fst, 0, 0);
+	put_img_to_img(map->enemy_snd, 0, 0);
 }

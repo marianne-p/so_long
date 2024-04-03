@@ -18,6 +18,8 @@
 # define PLAYER_PATH "/home/mpihur/42CORE/so_long/xpm/char.xpm"
 # define FLOWER_PATH "/home/mpihur/42CORE/so_long/xpm/flow.xpm"
 # define EXIT_PATH "/home/mpihur/42CORE/so_long/xpm/exit.xpm"
+# define ENEMY_1 "/home/mpihur/42CORE/so_long/xpm/2.xpm"
+# define ENEMY_2 "/home/mpihur/42CORE/so_long/xpm/3.xpm"
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -47,6 +49,8 @@ typedef struct s_win
 	t_data	*p_img;
 	t_data	*flower_img;
 	t_data	*exit_img;
+	t_data	*enemy_fst;
+	t_data	*enemy_snd;
 	int		width;
 	int		height;
 	int		width_now;

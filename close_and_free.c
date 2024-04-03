@@ -12,6 +12,14 @@
 
 #include "so_long.h"
 
+static void	free_enemy(t_win *map)
+{
+	mlx_destroy_image(map->mlx_ptr, map->enemy_fst->img);
+	mlx_destroy_image(map->mlx_ptr, map->enemy_snd->img);
+	free(map->enemy_fst);
+	free(map->enemy_snd);
+}
+
 int	close_win(void *param)
 {
 	t_win	*map;
@@ -22,6 +30,7 @@ int	close_win(void *param)
 	mlx_destroy_image(map->mlx_ptr, map->p_img->img);
 	mlx_destroy_image(map->mlx_ptr, map->flower_img->img);
 	mlx_destroy_image(map->mlx_ptr, map->exit_img->img);
+	free_enemy(map);
 	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
@@ -38,12 +47,11 @@ int	close_win(void *param)
 
 int	handle_error_and_free(char *error, int ernum, t_win *map)
 {
-	//mlx_destroy_image(map->mlx_ptr, map->wall_img_ptr);
 	mlx_destroy_image(map->mlx_ptr, map->dimg->img);
 	mlx_destroy_image(map->mlx_ptr, map->p_img->img);
 	mlx_destroy_image(map->mlx_ptr, map->flower_img->img);
 	mlx_destroy_image(map->mlx_ptr, map->exit_img->img);
-	//mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	free_enemy(map);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
 	//ft_lstclear(&(map->exit_cpy), free);
