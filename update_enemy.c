@@ -14,7 +14,7 @@
 
 void    update_enemy(t_win **map_ptr)
 {
-    if ((*map_ptr)->frm % 2 == 0)
+    if ((*map_ptr)->frm % 5 == 0)
     {
         (*map_ptr)->frm++;
 		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
@@ -29,6 +29,23 @@ void    update_enemy(t_win **map_ptr)
 			(*map_ptr)->height_now);
     }
 }
+/*
+void    update_flower(t_win **map_ptr)
+{
+    if ((*map_ptr)->frm % 3 != 0)
+    else if ((*map_ptr)->frm % 3 == 1)
+	    mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
+		    (*map_ptr)->wall_img_ptr, (*map_ptr)->width_now,
+		    (*map_ptr)->height_now);
+    else
+        return ;
+}*/
+
+int     put_images_to_win_loop(void *param)
+{
+	put_images_to_win((t_win **)&param, *(((t_win *)param)->head_ptr));
+    return (0);
+}
 
 int    put_more_img(t_win **map_ptr, t_list *head, size_t i)
 {
@@ -41,9 +58,9 @@ int    put_more_img(t_win **map_ptr, t_list *head, size_t i)
     }
 	if ((ft_strncmp((&((char *)head->content)[i]), "C", 1)) == 0)
     {
-		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
-			(*map_ptr)->flower_img->img, (*map_ptr)->width_now,
-			(*map_ptr)->height_now);
+	    mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
+		    (*map_ptr)->flower_img->img, (*map_ptr)->width_now,
+		    (*map_ptr)->height_now);
         return (1);
     }
 	if ((ft_strncmp((&((char *)head->content)[i]), "N", 1)) == 0)

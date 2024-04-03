@@ -80,6 +80,7 @@ void	check_before_move(char tile, t_win *map);
 int		exit_or_noexit(char *tile, t_win *map);
 int		check_collectibles(t_list *head, int i, int count);
 void	*put_images_to_win(t_win **map_ptr, t_list *head);
+int     put_images_to_win_loop(void *param);
 int		put_more_img(t_win **map_ptr, t_list *head, size_t i);
 void    update_enemy(t_win **map_ptr);
 int		close_win(void *param);

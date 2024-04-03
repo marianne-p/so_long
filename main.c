@@ -74,8 +74,8 @@ int	main(int argc, char **argv)
 	mlx_key_hook(map->win_ptr, &handle_keys, (void *)map);
 	mlx_hook(map->win_ptr, DestroyNotify, ButtonReleaseMask,
 		&close_win, (void *)map);
+//	mlx_loop_hook(map->mlx_ptr, put_images_to_win_loop, (void *)map);
 	mlx_loop(map->mlx_ptr);
-	ft_printf("Going to lstclear in main()");
 	ft_lstclear(&head, free);
 	free(map);
 	return (0);
