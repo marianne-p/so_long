@@ -21,6 +21,17 @@
     }
 }*/
 
+void	check_before_move(char tile, t_win *map)
+{
+	if (exit_or_noexit(&tile, map) == 0)
+		exit (close_win(map));
+	if (ft_strncmp("N", &tile, 1) == 0)
+	{
+		ft_printf("Oh no! You touched the ENEMY! \n");
+		exit (close_win(map));
+	}
+}
+
 void	find_and_put_exit(t_win *map, int i, t_list *head, int count)
 {
 	int		j;

@@ -36,28 +36,16 @@ void	*window_image(t_win **map_ptr)
 
 void	ft_put_the_img(t_win **map_ptr, t_list *head, size_t i)
 {
-	const char	ch[5] = "1PCE0";
-
-	if ((ft_strncmp((&((char *)head->content)[i]), &ch[0], 1)) == 0)
-	{
-		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
-			(*map_ptr)->wall_img_ptr, (*map_ptr)->width_now,
-			(*map_ptr)->height_now);
-	}
-	else if ((ft_strncmp((&((char *)head->content)[i]), &ch[1], 1)) == 0)
-		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
-			(*map_ptr)->p_img->img, (*map_ptr)->width_now,
-			(*map_ptr)->height_now);
-	else if ((ft_strncmp((&((char *)head->content)[i]), &ch[2], 1)) == 0)
-		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
-			(*map_ptr)->flower_img->img, (*map_ptr)->width_now,
-			(*map_ptr)->height_now);
-	else if (check_collectibles((*(*map_ptr)->head_ptr), 0, 0) == 0
-		&& (ft_strncmp((&((char *)head->content)[i]), &ch[3], 1)) == 0)
+	if (check_collectibles((*(*map_ptr)->head_ptr), 0, 0) == 0
+		&& (ft_strncmp((&((char *)head->content)[i]), "E", 1)) == 0)
 		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
 			(*map_ptr)->exit_img->img, (*map_ptr)->width_now,
 			(*map_ptr)->height_now);
-	else
+	else if ((ft_strncmp((&((char *)head->content)[i]), "1", 1)) == 0)
+		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
+			(*map_ptr)->wall_img_ptr, (*map_ptr)->width_now,
+			(*map_ptr)->height_now);
+	else if (!put_more_img(map_ptr, head, i))
 		mlx_put_image_to_window((*map_ptr)->mlx_ptr, (*map_ptr)->win_ptr,
 			(*map_ptr)->dimg->img, (*map_ptr)->width_now,
 			(*map_ptr)->height_now);
@@ -66,10 +54,18 @@ void	ft_put_the_img(t_win **map_ptr, t_list *head, size_t i)
 void	*put_images_to_win(t_win **map_ptr, t_list *head)
 {
 	size_t		i;
+//	t_list		*temp;
 
 	i = 0;
 	(*map_ptr)->width_now = 0;
 	(*map_ptr)->height_now = 0;
+/*	temp = head;
+	ft_printf("printing head we're rendering from in put_img_to_win\n");
+	while (temp)
+	{
+		ft_printf("%s", (char *)temp->content);
+		temp = temp->next;
+	}*/
 	while ((*map_ptr)->height_now < (*map_ptr)->height)
 	{
 		while ((*map_ptr)->width_now < (*map_ptr)->width
@@ -130,6 +126,7 @@ void	create_map_win(t_win **map_ptr, t_list **head_ptr)
 	(*map_ptr)->height = TILE_SIDE * (ft_lstsize(*head_ptr));
 	(*map_ptr)->head_ptr = head_ptr;
 	(*map_ptr)->moves = 0;
+	(*map_ptr)->frm = 0;
 	if (window_image(map_ptr) == NULL)
 		return ;
 	if (put_images_to_win(map_ptr, *((*map_ptr)->head_ptr)) == NULL)

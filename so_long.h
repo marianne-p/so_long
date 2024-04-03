@@ -51,6 +51,7 @@ typedef struct s_win
 	t_data	*exit_img;
 	t_data	*enemy_fst;
 	t_data	*enemy_snd;
+	int		frm;
 	int		width;
 	int		height;
 	int		width_now;
@@ -75,9 +76,12 @@ void	create_collectible(t_win *map);
 void	create_map_win(t_win **map_ptr, t_list **head_ptr);
 t_list	*check_and_change(t_win *map, int v, t_list *temp, t_list *prev);
 void	print_the_moves(t_win *map);
+void	check_before_move(char tile, t_win *map);
 int		exit_or_noexit(char *tile, t_win *map);
 int		check_collectibles(t_list *head, int i, int count);
 void	*put_images_to_win(t_win **map_ptr, t_list *head);
+int		put_more_img(t_win **map_ptr, t_list *head, size_t i);
+void    update_enemy(t_win **map_ptr);
 int		close_win(void *param);
 /**/
 int		handle_keys(int keysum, void *param);

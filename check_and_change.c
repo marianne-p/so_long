@@ -14,8 +14,7 @@
 
 t_list	*mv_up(t_win *map, t_list *temp, t_list *prev, int i)
 {
-	if (exit_or_noexit(&((char *)prev->content)[i], map) == 0)
-		exit (close_win(map));
+	check_before_move(((char *)prev->content)[i], map);
 	((char *)prev->content)[i] = 'P';
 	((char *)temp->content)[i] = '0';
 	map->moves++;
@@ -24,8 +23,7 @@ t_list	*mv_up(t_win *map, t_list *temp, t_list *prev, int i)
 
 t_list	*mv_down(t_win *map, t_list *temp, int i)
 {
-	if (exit_or_noexit(&((char *)temp->next->content)[i], map) == 0)
-		exit (close_win(map));
+	check_before_move(((char *)temp->next->content)[i], map);
 	((char *)temp->content)[i] = '0';
 	((char *)temp->next->content)[i] = 'P';
 	map->moves++;
@@ -34,8 +32,7 @@ t_list	*mv_down(t_win *map, t_list *temp, int i)
 
 t_list	*mv_rl(t_win *map, t_list *temp, int i, int j)
 {
-	if (exit_or_noexit(&((char *)temp->content)[j], map) == 0)
-		exit (close_win(map));
+	check_before_move(((char *)temp->content)[j], map);
 	((char *)temp->content)[i] = '0';
 	((char *)temp->content)[j] = 'P';
 	map->moves++;

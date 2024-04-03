@@ -12,23 +12,6 @@
 
 #include "so_long.h"
 
-/*void	put_pixel_img(t_data *img, int x, int y, int color)
-{
-	char    *dst;
-
-	//printf("%d, ", color);
-	//printf("Img address in put_pixel_img: %p\n", img->addr);
-	//printf("Color received in put_pixel_img: %d\n", color);
-	if (color == (int)0xFF000000)
-	{
-	    dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	    *(unsigned int *)dst = 0x2F2E2F;
-	    //printf("OTHER\n");
-	}
-	else
-	    return ;
-}*/
-
 unsigned int	get_pixel_img(t_data *img, int x, int y)
 {
 	return (*(unsigned int *)((img->addr + (y * img->line_length)
