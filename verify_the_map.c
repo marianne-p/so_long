@@ -102,6 +102,6 @@ int	verify_the_map(t_list *head, int res, t_win *map)
 		exit(handle_error_and_free("No walls: ", 1, map));
 	res = check_the_path(head, 0);
 	if (res > 0)
-		exit(handle_error_and_free("No path to Collectible, Exit or way for Player to move", 1, map));
+		exit(handle_error_and_free("No path to C, E or P", 1, map));
 	return (0);
 }

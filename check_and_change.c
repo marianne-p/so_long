@@ -19,7 +19,6 @@ t_list	*mv_up(t_win *map, t_list *temp, t_list *prev, int i)
 	((char *)prev->content)[i] = 'P';
 	((char *)temp->content)[i] = '0';
 	map->moves++;
-	ft_printf("Moves: %d\n", map->moves);
 	return (*(map->head_ptr));
 }
 
@@ -30,7 +29,6 @@ t_list	*mv_down(t_win *map, t_list *temp, int i)
 	((char *)temp->content)[i] = '0';
 	((char *)temp->next->content)[i] = 'P';
 	map->moves++;
-	ft_printf("Moves: %d\n", map->moves);
 	return (*(map->head_ptr));
 }
 
@@ -41,7 +39,6 @@ t_list	*mv_rl(t_win *map, t_list *temp, int i, int j)
 	((char *)temp->content)[i] = '0';
 	((char *)temp->content)[j] = 'P';
 	map->moves++;
-	ft_printf("Moves: %d\n", map->moves);
 	return (*(map->head_ptr));
 }
 
@@ -49,7 +46,7 @@ void	print_the_moves(t_win *map)
 {
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 10, 12, 0xFFFF00, "count =");
 	map->str = ft_itoa(map->moves);
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 80, 12, 0xFFFF00, map->str);	
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 80, 12, 0xFFFF00, map->str);
 	free(map->str);
 }
 

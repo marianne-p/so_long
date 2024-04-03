@@ -94,17 +94,20 @@ void	create_collectible(t_win *map)
 	exit_img = (t_data *)malloc(sizeof(t_data));
 	map->enemy_fst = (t_data *)malloc(sizeof(t_data));
 	map->enemy_snd = (t_data *)malloc(sizeof(t_data));
-	if (p_img == NULL || flower_img == NULL || exit_img == NULL || map->enemy_fst == NULL || map->enemy_snd == NULL)
+	if (p_img == NULL || flower_img == NULL || exit_img == NULL
+		|| map->enemy_fst == NULL || map->enemy_snd == NULL)
 		return ;
 	images(p_img, flower_img, exit_img, map);
 	map->enemy_fst->img = mlx_xpm_file_to_image(map->mlx_ptr, ENEMY_1,
 			&(map->img_width), &(map->img_height));
-	map->enemy_fst->addr = mlx_get_data_addr(map->enemy_fst->img, &map->enemy_fst->bits_per_pixel,
+	map->enemy_fst->addr = mlx_get_data_addr(map->enemy_fst->img,
+			&map->enemy_fst->bits_per_pixel,
 			&map->enemy_fst->line_length, &map->enemy_fst->endian);
 	map->enemy_snd->img = mlx_xpm_file_to_image(map->mlx_ptr, ENEMY_2,
 			&(map->img_width), &(map->img_height));
-	map->enemy_snd->addr = mlx_get_data_addr(map->enemy_snd->img, &map->enemy_snd->bits_per_pixel,
-			&map->enemy_snd->line_length, &map->enemy_snd->endian);
+	map->enemy_snd->addr = mlx_get_data_addr(map->enemy_snd->img,
+			&map->enemy_snd->bits_per_pixel, &map->enemy_snd->line_length,
+			&map->enemy_snd->endian);
 	put_img_to_img(map->enemy_fst, 0, 0);
 	put_img_to_img(map->enemy_snd, 0, 0);
 }

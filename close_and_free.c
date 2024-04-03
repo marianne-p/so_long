@@ -36,7 +36,6 @@ int	close_win(void *param)
 	free(map->mlx_ptr);
 	ft_lstclear(&(map->exit_cpy), free);
 	ft_lstclear(map->head_ptr, free);
-//	free(map->wall_img_ptr);
 	free(map->dimg);
 	free(map->p_img);
 	free(map->flower_img);
@@ -54,7 +53,6 @@ int	handle_error_and_free(char *error, int ernum, t_win *map)
 	free_enemy(map);
 	mlx_destroy_display(map->mlx_ptr);
 	free(map->mlx_ptr);
-	//ft_lstclear(&(map->exit_cpy), free);
 	ft_lstclear(map->head_ptr, free);
 	free(map->dimg);
 	free(map->p_img);
