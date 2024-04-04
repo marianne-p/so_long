@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 17:17:15 by mpihur            #+#    #+#             */
-/*   Updated: 2024/03/28 17:22:45 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:17:29 by mpihur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ int	has_walls(t_list *head, int i, t_list *last, int len)
 */
 int	verify_the_map(t_list *head, int res, t_win *map)
 {
+	if (!head->content)
+		exit(handle_error_and_free("Empty map", 1, map));
 	if (is_rectangular(head) != 0)
 		exit(handle_error_and_free("Map not rectangular", 1, map));
 	if (contains_ecp(head) != 0)
