@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 15:59:27 by mpihur            #+#    #+#             */
-/*   Updated: 2024/03/30 13:28:57 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/04/04 14:50:13 by mpihur           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,15 @@ static void	help_verify(t_list **temp, t_list **head, int i, t_list *prev)
 {
 	if ((*temp)->next != NULL
 		&& ft_strncmp(&((char *)(*temp)->next->content)[i], "1", 1) != 0
-		&& ft_strncmp(&((char *)(*temp)->next->content)[i], "V", 1) != 0)
+		&& ft_strncmp(&((char *)(*temp)->next->content)[i], "V", 1) != 0
+		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "N", 1) != 0)
 	{
 		((char *)(*temp)->next->content)[i] = 'V';
 		verify_head_path(&((*temp)->next), head, i, NULL);
 	}
 	if (prev != NULL && ft_strncmp(&((char *)(prev->content))[i], "1", 1) != 0
-		&& ft_strncmp(&((char *)prev->content)[i], "V", 1) != 0)
+		&& ft_strncmp(&((char *)prev->content)[i], "V", 1) != 0
+		&& ft_strncmp(&((char *)prev->content)[i], "N", 1) != 0)
 	{
 		((char *)(prev->content))[i] = 'V';
 		verify_head_path(&prev, head, i, NULL);
@@ -63,14 +65,16 @@ void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev)
 	prev = find_prev_node(*temp, *head);
 	if (i > 0 && (((char *)(*temp)->content)[i - 1])
 		&& ft_strncmp(&((char *)(*temp)->content)[i - 1], "1", 1) != 0
-		&& ft_strncmp(&((char *)(*temp)->content)[i - 1], "V", 1) != 0)
+		&& ft_strncmp(&((char *)(*temp)->content)[i - 1], "V", 1) != 0
+		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "N", 1) != 0)
 	{
 		((char *)((*temp)->content))[i - 1] = 'V';
 		verify_head_path(temp, head, i - 1, NULL);
 	}
 	if (i + 1 < ((int)ft_strlen((char *)(*temp)->content) - 1)
 		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "1", 1) != 0
-		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "V", 1) != 0)
+		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "V", 1) != 0
+		&& ft_strncmp(&((char *)(*temp)->content)[i + 1], "N", 1) != 0)
 	{
 		((char *)(*temp)->content)[i + 1] = 'V';
 		verify_head_path(temp, head, i + 1, NULL);

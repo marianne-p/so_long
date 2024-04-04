@@ -6,14 +6,14 @@
 #    By: mpihur <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/28 16:00:28 by mpihur            #+#    #+#              #
-#    Updated: 2024/03/30 13:24:05 by mpihur           ###   ########.fr        #
+#    Updated: 2024/04/04 15:02:47 by mpihur           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= so_long
 CC	:= gcc
 GNL	:= get_next_line/
-SRCS	:= main.c verify_the_map.c check_path.c check_cpe.c close_and_free.c \
+SRCS	:= main.c verify_the_map.c check_path.c check_cpe.c only_enpc.c close_and_free.c \
 	   create_map_win.c create_square.c create_cpe_img.c check_and_change.c update_enemy.c check_collectibles.c \
 	   $(GNL)get_next_line.c $(GNL)get_next_line_utils.c	   
 OBJ := $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: mpihur <marvin@42.fr>	                  +#+  +:+       +#+        */
 /*	                                            +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 16:33:14 by mpihur	        #+#    #+#             */
-/*   Updated: 2024/03/30 13:28:58 by mpihur           ###   ########.fr       */
+/*   Updated: 2024/04/04 15:02:41 by mpihur           ###   ########.fr       */
 /*	                                                                        */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_win
 
 int		handle_error(char *error, int ernum);
 int		verify_the_map(t_list *head, int res, t_win *map);
+int		only_enpc(t_list *head);
 int		handle_error_and_free(char *error, int ernum, t_win *map);
 void	verify_head_path(t_list **temp, t_list **head, int i, t_list *prev);
 int		check_the_path(t_list *head, int ret);
