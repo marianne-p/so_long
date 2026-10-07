@@ -1,4 +1,6 @@
-# so_long
+# so_long is a tile capybara game built on educational engine, see the full project task in so_long.pdf
+
+<img width="600" height="474" alt="1710622090500" src="https://github.com/user-attachments/assets/0f9c122d-410c-4320-966d-cc8b3f73558a" />
 
 UPD Mar 10: Added squares images creation (create_square.c), compiles, needs checking on errors. 
 
